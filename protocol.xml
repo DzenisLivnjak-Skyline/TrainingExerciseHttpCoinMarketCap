@@ -45,22 +45,22 @@ Any inquiries can be addressed to:
 -->
 
 <Protocol xmlns="http://www.skyline.be/protocol">
-	<Name>Exercise HTTP CoinMarketCap</Name>
+	<Name>Exercise HTTP CoinMarketCap dzenis</Name>
 	<Description>Exercise HTTP CoinMarketCap DataMiner connector</Description>
 	<Version>1.0.0.1</Version>
-	<IntegrationID>DMS-DRV-</IntegrationID>
+	<IntegrationID>DMS-DRV-0</IntegrationID>
 	<Provider>Skyline Communications</Provider>
-	<Vendor></Vendor>
-	<VendorOID>1.3.6.1.4.1.8813.2.</VendorOID>
-	<DeviceOID></DeviceOID>
-	<ElementType></ElementType>
-	<Type relativeTimers="true">virtual</Type>
-	<Display defaultPage="General" pageOrder="General"/>
+	<Vendor>Skyline Communications</Vendor>
+	<VendorOID>1.3.6.1.4.1.8813.2.0</VendorOID>
+	<DeviceOID>0</DeviceOID>
+	<ElementType>HTTP-excercise</ElementType>
+	<Type relativeTimers="true">http</Type>
+	<Display defaultPage="General" pageOrder="Authentication;Latest Listings;General;Latest Quotes"/>
 	<SNMP includepages="true">auto</SNMP>
 
 	<Compliancies>
 		<CassandraReady>true</CassandraReady>
-		<MinimumRequiredVersion>10.1.0.0 - 9966</MinimumRequiredVersion>
+		<MinimumRequiredVersion>10.3.0.0 - 12752</MinimumRequiredVersion>
 	</Compliancies>
 
 	<Params>
@@ -69,14 +69,862 @@ Any inquiries can be addressed to:
 			<Description>After Startup</Description>
 			<Type>dummy</Type>
 		</Param>
+		<Param id="3"> 
+			<Name>latestListingContentDisplayParam</Name>
+			<Description>Param Used for Getting the API Response</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>text</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="4">
+			<Name>statusCodeLatestListing</Name>
+			<Description>Status Code for Latest Listing Response</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>text</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+
+		<Param id="5" trending="false" save="true">
+			<Name>bearerToken</Name>
+			<Description>Bearer Token</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>text</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Authentication</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="Password">string</Type>
+			</Measurement>
+		</Param>
+		<Param id="55" setter="true">
+			<Name>bearerToken</Name>
+			<Description>Bearer Token</Description>
+			<Type>write</Type>
+			<Information>
+				<Subtext>text</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Authentication</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="Password">string</Type>
+			</Measurement>
+		</Param>
+
+		<Param id="100">
+			<Name>latestListingTable</Name>
+			<Description>Cryptocurrency Latest Listings</Description>
+			<Type>array</Type>
+			<Information>
+				<Subtext>Table with latest listings of cryptocurrency.</Subtext>
+			</Information>
+			<ArrayOptions index="0" options=";naming=/102">
+				<ColumnOption idx="0" pid="101" type="retrieved"/>
+				<ColumnOption idx="1" pid="102" type="retrieved"/>
+				<ColumnOption idx="2" pid="103" type="retrieved"/>
+				<ColumnOption idx="3" pid="104" type="retrieved"/>
+				<ColumnOption idx="4" pid="105" type="retrieved"/>
+				<ColumnOption idx="5" pid="106" type="retrieved"/>
+				<ColumnOption idx="6" pid="107" type="retrieved"/>
+			</ArrayOptions>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Latest Listings</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="tab=columns:101|0-102|1-103|2-104|3-105|4-106|5-107|6,
+						width:100-150-100-100-120-120-100,
+						sort:105|DESC|0-101|ASC|1-INT-INT,lines:25,filter:true">table</Type>
+			</Measurement>
+		</Param>
+
+		<Param id="101" trending="false">
+			<Name>latestListingInstance</Name>
+			<Description>Cryptocurrency ID</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+
+		<Param id="102" trending="false">
+			<Name>latestListingName</Name>
+			<Description>Name</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+
+		<Param id="103" trending="true">
+			<Name>latestListingsPrice</Name>
+			<Description>Price</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>2</Decimals>
+				<Exceptions>
+					<Exception id="1" value="-101">
+						<Display state="disabled">N/A</Display>
+						<Value>-101</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+				<Normal>100</Normal>
+			</Alarm>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Units>%</Units>
+				<Decimals>2</Decimals>
+				<Range>
+					<Low>0</Low>
+					<High>200000</High>
+				</Range>
+			</Display>
+			<Measurement>
+				<Type>number</Type>
+			</Measurement>
+		</Param>
+
+		<Param id="104" trending="false">
+			<Name>latestListingsDateAdded</Name>
+			<Description>Date Added</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
+				<Exceptions>
+					<Exception id="1" value="-101">
+						<Display state="disabled">N/A</Display>
+						<Value>-101</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
+			</Display>
+			<Measurement>
+				<Type options="date">number</Type>
+			</Measurement>
+		</Param>
+
+		<Param id="105" trending="false">
+			<Name>latestListingsLastUpdate</Name>
+			<Description>Last Update</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
+				<Exceptions>
+					<Exception id="1" value="-101">
+						<Display state="disabled">N/A</Display>
+						<Value>-101</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
+		</Param>
+
+		<Param id="106" trending="false">
+			<Name>latestListingsSymbol</Name>
+			<Description>Symbol</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+				<Exceptions>
+					<Exception id="1" value="-101">
+						<Display state="disabled">N/A</Display>
+						<Value>-101</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+
+		<Param id="107" trending="true">
+			<Name>latestListingsPercentChange24h</Name>
+			<Description>24 h % Change</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>5</Decimals>
+				<Exceptions>
+					<Exception id="1" value="-101">
+						<Display state="disabled">N/A</Display>
+						<Value>-101</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+				<CL>-50</CL>
+				<MiL>-15</MiL>
+				<Normal>0</Normal>
+				<MiH>15</MiH>
+				<CH>50</CH>
+			</Alarm>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Units>%</Units>
+				<Decimals>5</Decimals>
+				<Range>
+					<Low>-100</Low>
+				</Range>
+			</Display>
+			<Measurement>
+				<Type>number</Type>
+			</Measurement>
+		</Param>
+
+		<Param id="200">
+			<Name>categoriesTable</Name>
+			<Description>Categories Table</Description>
+			<Type>array</Type>
+			<Information>
+				<Subtext>Table with categories from CoinMarketCap</Subtext>
+			</Information>
+			<ArrayOptions index="0" options=";naming=/202">
+				<ColumnOption idx="0" pid="201" type="retrieved" options=""/>
+				<ColumnOption idx="1" pid="202" type="retrieved" options=""/>
+				<ColumnOption idx="2" pid="203" type="retrieved" options=""/>
+				<ColumnOption idx="3" pid="204" type="retrieved" options=""/>
+				<ColumnOption idx="4" pid="205" type="retrieved" options=""/>
+				<ColumnOption idx="5" pid="206" type="retrieved" options=""/>
+				<ColumnOption idx="6" pid="207" type="retrieved" options=""/>
+				<ColumnOption idx="7" pid="208" type="retrieved" options=""/>
+			</ArrayOptions>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>General</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="tab=columns:201|0-202|1-203|2-204|3-205|4-206|5-207|6-208|7,width:101-107-122-100-100-119-156-100,sort:STRING-STRING-INT-INT-INT-INT-INT|DESC|6-STRING,lines:25,filter:true">table</Type>
+			</Measurement>
+		</Param>
+		<Param id="201">
+			<Name>categoriesTableInstance</Name>
+			<Description>Category ID</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Represents the ID of the Category</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>text</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="202">
+			<Name>categoriesName</Name>
+			<Description>Category Name</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Represents the name of the Category</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>text</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="203">
+			<Name>categoriesNumberOfTokens</Name>
+			<Description>Number of Tokens</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Represents the number of tokens in the Category</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+				<CL>0</CL>
+				<MaL>10</MaL>
+				<MiL>20</MiL>
+				<Normal>50</Normal>
+				<MiH>100</MiH>
+				<MaH>200</MaH>
+				<CH>500</CH>
+			</Alarm>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Units>Units</Units>
+				<Range>
+					<Low>0</Low>
+					<High>10000</High>
+				</Range>
+			</Display>
+			<Measurement>
+				<Type>number</Type>
+			</Measurement>
+		</Param>
+		<Param id="204">
+			<Name>categoriesAvgPricechange</Name>
+			<Description>Price Change</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Represents the price change of the Category</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>3</Decimals>
+			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+				<CL>-50</CL>
+				<MaL>-30</MaL>
+				<MiL>-15</MiL>
+				<Normal>0</Normal>
+				<MiH>15</MiH>
+				<MaH>30</MaH>
+				<CH>50</CH>
+			</Alarm>
+			<Display>
+				<Range>
+					<Low>-100</Low>
+				</Range>
+				<Decimals>3</Decimals>
+				<Units>%</Units>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>number</Type>
+			</Measurement>
+		</Param>
+		<Param id="205">
+			<Name>categoriesMarketCap</Name>
+			<Description>Market Cap</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Represents the Market Cap of the Category in dollars</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>2</Decimals>
+			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+				<CL>0</CL>
+				<MaL>10000</MaL>
+				<MiL>50000</MiL>
+				<Normal>150000</Normal>
+				<MiH>500000</MiH>
+				<MaH>1000000</MaH>
+				<CH>10000000</CH>
+			</Alarm>
+			<Display>
+				<Units>Units</Units>
+				<Range>
+					<Low>0</Low>
+					<High>100000000</High>
+				</Range>
+				<Decimals>2</Decimals>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>number</Type>
+			</Measurement>
+		</Param>
+		<Param id="206">
+			<Name>categoriesVolume</Name>
+			<Description>Volume</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Represents the Volume of the Category</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>2</Decimals>
+			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+				<CL>0</CL>
+				<MaL>10000</MaL>
+				<MiL>50000</MiL>
+				<Normal>150000</Normal>
+				<MiH>500000</MiH>
+				<MaH>1000000</MaH>
+				<CH>10000000</CH>
+			</Alarm>
+			<Display>
+				<Range>
+					<Low>0</Low>
+					<High>150000000</High>
+				</Range>
+				<Decimals>2</Decimals>
+				<Units>Units</Units>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>number</Type>
+			</Measurement>
+		</Param>
+		<Param id="207">
+			<Name>categoriesLastUpdated</Name>
+			<Description>Data Poll Time</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Last poll time for this category</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
+		</Param>
+		<Param id="208">
+			<Name>categoriesUserAction</Name>
+			<Description>User Action</Description>
+			<Type>write</Type>
+			<Information>
+				<Subtext>Refresh category from the list</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type width="110">button</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Refresh</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="209" trending="true">
+			<Name>activeCryptocurrencies</Name>
+			<Description>Active Cryptocurrencies</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Number of active Cryptocurrencies</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<Units>Units</Units>
+				<RTDisplay>true</RTDisplay>
+				<Range>
+					<Low>0</Low>
+					<High>35000</High>
+				</Range>
+				<Positions>
+					<Position>
+						<Page>Latest Quotes</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>number</Type>
+			</Measurement>
+		</Param>
+		<Param id="210" trending="false">
+			<Name>totalCryptocurrencies</Name>
+			<Description>Total Cryptocurrencies</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Total number of Cryptocurrencies</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<Units>Units</Units>
+				<RTDisplay>true</RTDisplay>
+				<Range>
+					<Low>0</Low>
+					<High>40000</High>
+				</Range>
+				<Positions>
+					<Position>
+						<Page>Latest Quotes</Page>
+						<Column>0</Column>
+						<Row>1</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>number</Type>
+			</Measurement>
+		</Param>
+		<Param id="211" trending="true">
+			<Name>activeExchanges</Name>
+			<Description>Active Exchanges</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Total number of Active Exchanges</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<Units>Units</Units>
+				<RTDisplay>true</RTDisplay>
+				<Range>
+					<Low>0</Low>
+					<High>20000</High>
+				</Range>
+				<Positions>
+					<Position>
+						<Page>Latest Quotes</Page>
+						<Column>0</Column>
+						<Row>3</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>number</Type>
+			</Measurement>
+		</Param>
+		<Param id="212" trending="false">
+			<Name>totalExchanges</Name>
+			<Description>Total Exchanges</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Total number of Exchanges</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<Units>Units</Units>
+				<RTDisplay>true</RTDisplay>
+				<Range>
+					<Low>0</Low>
+					<High>20000</High>
+				</Range>
+				<Positions>
+					<Position>
+						<Page>Latest Quotes</Page>
+						<Column>0</Column>
+						<Row>4</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>number</Type>
+			</Measurement>
+		</Param>
+		<Param id="213" trending="true">
+			<Name>ethDominance</Name>
+			<Description>Ethereum Dominance</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Represents ethereum dominance</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>3</Decimals>
+			</Interprete>
+			<Display>
+				<Units>%</Units>
+				<RTDisplay>true</RTDisplay>
+				<Decimals>3</Decimals>
+				<Range>
+					<Low>0</Low>
+					<High>100</High>
+				</Range>
+				<Positions>
+					<Position>
+						<Page>Latest Quotes</Page>
+						<Column>0</Column>
+						<Row>6</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>number</Type>
+			</Measurement>
+		</Param>
+		<Param id="214" trending="true">
+			<Name>btcDominance</Name>
+			<Description>Bitcoin Dominance</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Represents bitcoin dominance</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>3</Decimals>
+			</Interprete>
+			<Display>
+				<Units>%</Units>
+				<RTDisplay>true</RTDisplay>
+				<Decimals>3</Decimals>
+				<Range>
+					<Low>0</Low>
+					<High>100</High>
+				</Range>
+				<Positions>
+					<Position>
+						<Page>Latest Quotes</Page>
+						<Column>0</Column>
+						<Row>7</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>number</Type>
+			</Measurement>
+		</Param>
+		<Param id="215" trending="false">
+			<Name>latestQuoteLastUpdate</Name>
+			<Description>Last Updated At</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Represents the time when the data was last updated</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<Decimals>8</Decimals>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
+				<Positions>
+					<Position>
+						<Page>Latest Quotes</Page>
+						<Column>0</Column>
+						<Row>9</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
+		</Param>
+		<Param id="216">
+			<Name>latestQuotesContent</Name>
+			<Description>Holds the raw response for latest quotes</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>text</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="217" trending="false">
+			<Name>latestStatusQuotes</Name>
+			<Description>description</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext></Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="300">
+			<Name>categoriesContent</Name>
+			<Description>Raw categories API response</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>text</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="301">
+			<Name>categoriesStatusCode</Name>
+			<Description>Status code for categories response</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>text</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+
+
 	</Params>
 
 	<QActions>
 		<QAction id="1" name="Precompiled Code" encoding="csharp" options="precompile" />
 		<QAction id="2" name="After Startup" encoding="csharp" triggers="2" />
+		<QAction id="3" name="Get Categories" encoding="csharp" triggers="300" />
+		<QAction id="4" name="Parse Latest Quotes" encoding="csharp" triggers="216" />
+		<QAction id="5" name="Parse Latest Listings" encoding="csharp" triggers="3"/>
 	</QActions>
 
 	<Groups>
+		<Group id="1">
+			<Name>Get Latest Listings Group</Name>
+			<Type>poll</Type>
+			<Condition><![CDATA[id:5 != emptystring]]></Condition>
+			<Content>
+				<Session>1</Session>
+			</Content>
+		</Group>
 		<Group id="2">
 			<Name>After Startup</Name>
 			<Description>After Startup</Description>
@@ -85,20 +933,59 @@ Any inquiries can be addressed to:
 				<Action>2</Action>
 			</Content>
 		</Group>
+		<Group id="4">
+			<Name>Get Categories Group</Name>
+			<Type>poll</Type>
+			<Condition><![CDATA[id:5 != emptystring]]></Condition>
+			<Content>
+				<Session>2</Session>
+			</Content>
+		</Group>
+		<Group id="5">
+			<Name>Get Latest Quotes Group</Name>
+			<Type>poll</Type>
+			<Condition><![CDATA[id:5 != emptystring]]></Condition>
+			<Content>
+				<Session>3</Session>
+			</Content>
+		</Group>
+	
 	</Groups>
-
 	<Triggers>
 		<Trigger id="1">
-			<Name>After Startup</Name>
+			<Name>After Startup (Merged)</Name>
 			<On>protocol</On>
 			<Time>after startup</Time>
 			<Type>action</Type>
 			<Content>
 				<Id>1</Id>
+				<Id>4</Id>
+				<Id>7</Id>
 			</Content>
 		</Trigger>
-	</Triggers>
+		<Trigger id="2">
+			<Name>On Bearer Token Change</Name>
+			<On id="5">parameter</On>
+			<Time>change</Time>
+			<Type>action</Type>
+			<Condition><![CDATA[id:5 != emptystring]]></Condition>
+			<Content>
+				<Id>5</Id>
+				<Id>6</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="3">
+			<Name>Refresh Category Table</Name>
+			<On id="208">parameter</On>
+			<Time>change</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>3</Id>
+			</Content>
+		</Trigger>
 
+	</Triggers>
+	
 	<Actions>
 		<Action id="1">
 			<Name>After Startup Group</Name>
@@ -110,7 +997,43 @@ Any inquiries can be addressed to:
 			<On id="2">parameter</On>
 			<Type>run actions</Type>
 		</Action>
+		<Action id="3">
+			<Name>Run Get Categories QAction</Name>
+			<On id="3">parameter</On>
+			<Type>run actions</Type>
+		</Action>
+		<Action id="4">
+			<Name>Run Get Categories Group</Name>
+			<On id="4">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="5">
+			<Name>On Bearer Change Get Categories</Name>
+			<On id="4">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="6">
+			<Name>On Bearer Change Get Latest Quotes</Name>
+			<On id="5">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="7">
+			<Name>Run Get Latest Listings Group</Name>
+			<On id="1">group</On>
+			<Type>execute next</Type>
+		</Action>
+
+
+
+
+
+
+
+
+
 	</Actions>
+
+
 
 	<Timers>
 		<Timer id="1">
@@ -122,9 +1045,11 @@ Any inquiries can be addressed to:
 		</Timer>
 		<Timer id="2">
 			<Name>Medium Timer (1m)</Name>
-			<Time initial="true" dataDisplay="30000">60000</Time>
+			<Time initial="true">60000</Time>
 			<Interval>75</Interval>
 			<Content>
+				<Group>4</Group>
+				<Group>5</Group>
 			</Content>
 		</Timer>
 		<Timer id="3">
@@ -134,9 +1059,64 @@ Any inquiries can be addressed to:
 			<Content>
 			</Content>
 		</Timer>
+		
 	</Timers>
 
-	<PortSettings>
+	<HTTP>
+		<Session id="1" name="getLatestListings">
+			<Connection id="1" name="Get Latest Listings">
+				<Request verb="GET" url="/api/custom/coinmarketcap?content=latestlistings">
+					<Headers>
+						<Header key="Authorization" pid="5"/>
+					</Headers>
+				</Request>
+				<Response statusCode="4">
+					<Content pid="3"></Content>
+				</Response>
+			</Connection>
+		</Session>
+		<Session id="2" name="getCategories">
+			<Connection id="1" name="Get Categories">
+				<Request verb="GET" url="/api/custom/coinmarketcap?content=categories">
+					<Headers>
+						<Header key="Authorization" pid="5"/>
+					</Headers>
+				</Request>
+				<Response statusCode="301">
+					<Content pid="300"/>
+				</Response>
+			</Connection>
+		</Session>
+
+		<Session id="3" name="getLatestQuotes">
+			<Connection id="1" name="Get Latest Quotes">
+				<Request verb="GET" url="/api/custom/coinmarketcap?content=latestquotes">
+					<Headers>
+						<Header key="Authorization" pid="5"/>
+					</Headers>
+				</Request>
+				<Response statusCode="217">
+					<Content pid="216"/>
+				</Response>
+			</Connection>
+		</Session>
+	</HTTP>
+	<PortSettings name="HTTP Connection">
+		<PortTypeSerial>
+			<Disabled>true</Disabled>
+		</PortTypeSerial>
+		<PortTypeUDP>
+			<Disabled>true</Disabled>
+		</PortTypeUDP>
+		<IPport>
+			<DefaultValue>443</DefaultValue>
+		</IPport>
+		<BusAddress>
+			<Disabled>true</Disabled>
+		</BusAddress>
+		<TimeoutTime>
+			<DefaultValue>15000</DefaultValue>
+		</TimeoutTime>
 	</PortSettings>
 
 	<VersionHistory>
@@ -151,7 +1131,7 @@ Any inquiries can be addressed to:
 									<MinorVersion id="1">
 										<Date>2024-01-11</Date>
 										<Provider>
-											<Author>XXX</Author>
+											<Author>dzl</Author>
 											<Company>Skyline Communications</Company>
 										</Provider>
 										<Changes>
