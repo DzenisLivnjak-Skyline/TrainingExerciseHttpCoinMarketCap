@@ -40,7 +40,7 @@ public static class QAction
                     item.DateAdded.ToOADate(),
                     item.LastUpdated.ToOADate(),
                     item.Symbol ?? string.Empty,
-                    item.Quote?.USD?.PercentChange24h ?? -101d
+                    item.Quote?.USD?.PercentChange24h ?? -101d,
                 });
             }
 
@@ -91,7 +91,7 @@ public static class QAction
                     exceptionValue,
                     exceptionValue,
                     "-101",
-                    exceptionValue
+                    exceptionValue,
                 });
             }
 

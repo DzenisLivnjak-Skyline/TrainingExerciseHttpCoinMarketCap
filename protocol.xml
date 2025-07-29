@@ -192,6 +192,9 @@ Any inquiries can be addressed to:
 			<Name>latestListingInstance</Name>
 			<Description>Cryptocurrency ID</Description>
 			<Type>read</Type>
+			<Information>
+				<Subtext>Table with latest listings of cryptocurrency.</Subtext>
+			</Information>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>string</Type>
@@ -209,6 +212,9 @@ Any inquiries can be addressed to:
 			<Name>latestListingName</Name>
 			<Description>Name</Description>
 			<Type>read</Type>
+			<Information>
+				<Subtext>Table with latest listings of cryptocurrency.</Subtext>
+			</Information>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>string</Type>
@@ -226,6 +232,9 @@ Any inquiries can be addressed to:
 			<Name>latestListingsPrice</Name>
 			<Description>Price</Description>
 			<Type>read</Type>
+			<Information>
+				<Subtext>Table with latest listings of cryptocurrency.</Subtext>
+			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
@@ -260,6 +269,9 @@ Any inquiries can be addressed to:
 			<Name>latestListingsDateAdded</Name>
 			<Description>Date Added</Description>
 			<Type>read</Type>
+			<Information>
+				<Subtext>Table with latest listings of cryptocurrency.</Subtext>
+			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
@@ -285,6 +297,9 @@ Any inquiries can be addressed to:
 			<Name>latestListingsLastUpdate</Name>
 			<Description>Last Update</Description>
 			<Type>read</Type>
+			<Information>
+				<Subtext>Table with latest listings of cryptocurrency.</Subtext>
+			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
@@ -310,6 +325,9 @@ Any inquiries can be addressed to:
 			<Name>latestListingsSymbol</Name>
 			<Description>Symbol</Description>
 			<Type>read</Type>
+			<Information>
+				<Subtext>Table with latest listings of cryptocurrency.</Subtext>
+			</Information>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>string</Type>
@@ -333,6 +351,9 @@ Any inquiries can be addressed to:
 			<Name>latestListingsPercentChange24h</Name>
 			<Description>24 h % Change</Description>
 			<Type>read</Type>
+			<Information>
+				<Subtext>Table with latest listings of cryptocurrency.</Subtext>
+			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
@@ -914,6 +935,9 @@ Any inquiries can be addressed to:
 		<QAction id="3" name="Get Categories" encoding="csharp" triggers="300" />
 		<QAction id="4" name="Parse Latest Quotes" encoding="csharp" triggers="216" />
 		<QAction id="5" name="Parse Latest Listings" encoding="csharp" triggers="3"/>
+		<!--<QAction id="6" name="Refresh" encoding="csharp" triggers="208"</QAction>>-->
+
+		
 	</QActions>
 
 	<Groups>
@@ -980,7 +1004,7 @@ Any inquiries can be addressed to:
 			<Time>change</Time>
 			<Type>action</Type>
 			<Content>
-				<Id>3</Id>
+				<Id>6</Id>
 			</Content>
 		</Trigger>
 
