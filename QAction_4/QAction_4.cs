@@ -1,7 +1,6 @@
 ﻿using System;
 using Skyline.DataMiner.Scripting;
 using Newtonsoft.Json;
-
 public static class Parameter
 {
     public const int ActiveCryptocurrencies = 209;
@@ -13,7 +12,6 @@ public static class Parameter
     public const int LatestQuoteLastUpdate = 215;
     public const int LatestQuotesContent = 216;
 }
-
 public static class QAction
 {
     public static void Run(SLProtocol protocol)
@@ -40,13 +38,5 @@ public static class QAction
         {
             protocol.Log("QA4|Exception: " + ex);
         }
-    }
-    private static double ConvertToEpoch(string isoTime)
-    {
-        if (DateTime.TryParse(isoTime, out DateTime dt))
-        {
-            return (dt.ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds;
-        }
-        return 0;
     }
 }

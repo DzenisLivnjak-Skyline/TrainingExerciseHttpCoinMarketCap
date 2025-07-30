@@ -19,6 +19,9 @@
     </PackageReference>
     <PackageReference Include="Skyline.DataMiner.Utils.Protocol.Extension" Version="1.0.0.4" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="LatestListenings\" />
+  </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties DisLinkId="1" DisProjectType="qactionProject" DisLinkedXmlFile="..\protocol.xml" />

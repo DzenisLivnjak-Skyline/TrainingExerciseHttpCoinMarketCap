@@ -98,14 +98,14 @@ public static class Parameter
 		{
 			/// <summary>PID: 101 | Type: read</summary>
 			[EditorBrowsable(EditorBrowsableState.Never)]
-			public const int latestlistinginstance_101 = 101;
+			public const int latestlistingtableinstance_101 = 101;
 			/// <summary>PID: 101 | Type: read</summary>
-			public const int latestlistinginstance = 101;
+			public const int latestlistingtableinstance = 101;
 			/// <summary>PID: 102 | Type: read</summary>
 			[EditorBrowsable(EditorBrowsableState.Never)]
-			public const int latestlistingname_102 = 102;
+			public const int latestlistingtablename_102 = 102;
 			/// <summary>PID: 102 | Type: read</summary>
-			public const int latestlistingname = 102;
+			public const int latestlistingtablename = 102;
 			/// <summary>PID: 103 | Type: read</summary>
 			[EditorBrowsable(EditorBrowsableState.Never)]
 			public const int latestlistingsprice_103 = 103;
@@ -139,14 +139,14 @@ public static class Parameter
 		{
 			/// <summary>IDX: 0 | Type: read</summary>
 			[EditorBrowsable(EditorBrowsableState.Never)]
-			public const int latestlistinginstance_101 = 0;
+			public const int latestlistingtableinstance_101 = 0;
 			/// <summary>IDX: 0 | Type: read</summary>
-			public const int latestlistinginstance = 0;
+			public const int latestlistingtableinstance = 0;
 			/// <summary>IDX: 1 | Type: read</summary>
 			[EditorBrowsable(EditorBrowsableState.Never)]
-			public const int latestlistingname_102 = 1;
+			public const int latestlistingtablename_102 = 1;
 			/// <summary>IDX: 1 | Type: read</summary>
-			public const int latestlistingname = 1;
+			public const int latestlistingtablename = 1;
 			/// <summary>IDX: 2 | Type: read</summary>
 			[EditorBrowsable(EditorBrowsableState.Never)]
 			public const int latestlistingsprice_103 = 2;
@@ -294,10 +294,10 @@ public interface SLProtocolExt : SLProtocol
 	object Bearertoken_5 { get; set; }
 	object Bearertoken { get; set; }
 	object Bearertoken_55 { get; set; }
-	object Latestlistinginstance_101 { get; set; }
-	object Latestlistinginstance { get; set; }
-	object Latestlistingname_102 { get; set; }
-	object Latestlistingname { get; set; }
+	object Latestlistingtableinstance_101 { get; set; }
+	object Latestlistingtableinstance { get; set; }
+	object Latestlistingtablename_102 { get; set; }
+	object Latestlistingtablename { get; set; }
 	object Latestlistingsprice_103 { get; set; }
 	object Latestlistingsprice { get; set; }
 	object Latestlistingsdateadded_104 { get; set; }
@@ -376,14 +376,14 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Bearertoken_55 {get { return GetParameter(55); }set { SetParameter(55, value); }}
 	/// <summary>PID: 101  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Latestlistinginstance_101 {get { return GetParameter(101); }set { SetParameter(101, value); }}
+	public System.Object Latestlistingtableinstance_101 {get { return GetParameter(101); }set { SetParameter(101, value); }}
 	/// <summary>PID: 101  | Type: read</summary>
-	public System.Object Latestlistinginstance {get { return GetParameter(101); }set { SetParameter(101, value); }}
+	public System.Object Latestlistingtableinstance {get { return GetParameter(101); }set { SetParameter(101, value); }}
 	/// <summary>PID: 102  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Latestlistingname_102 {get { return GetParameter(102); }set { SetParameter(102, value); }}
+	public System.Object Latestlistingtablename_102 {get { return GetParameter(102); }set { SetParameter(102, value); }}
 	/// <summary>PID: 102  | Type: read</summary>
-	public System.Object Latestlistingname {get { return GetParameter(102); }set { SetParameter(102, value); }}
+	public System.Object Latestlistingtablename {get { return GetParameter(102); }set { SetParameter(102, value); }}
 	/// <summary>PID: 103  | Type: read | EXCEPTIONS: N/A = -101</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Latestlistingsprice_103 {get { return GetParameter(103); }set { SetParameter(103, value); }}
@@ -530,14 +530,14 @@ public class LatestlistingtableQActionRow : QActionTableRow
 {
 	/// <summary>PID: 101 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Latestlistinginstance_101 { get { if (base.Columns.ContainsKey(0)) { return base.Columns[0]; } else { return null; } } set { if (base.Columns.ContainsKey(0)) { base.Columns[0] = value; } else { base.Columns.Add(0, value); } } }
+	public System.Object Latestlistingtableinstance_101 { get { if (base.Columns.ContainsKey(0)) { return base.Columns[0]; } else { return null; } } set { if (base.Columns.ContainsKey(0)) { base.Columns[0] = value; } else { base.Columns.Add(0, value); } } }
 	/// <summary>PID: 101 | Type: read</summary>
-	public System.Object Latestlistinginstance { get { if (base.Columns.ContainsKey(0)) { return base.Columns[0]; } else { return null; } } set { if (base.Columns.ContainsKey(0)) { base.Columns[0] = value; } else { base.Columns.Add(0, value); } } }
+	public System.Object Latestlistingtableinstance { get { if (base.Columns.ContainsKey(0)) { return base.Columns[0]; } else { return null; } } set { if (base.Columns.ContainsKey(0)) { base.Columns[0] = value; } else { base.Columns.Add(0, value); } } }
 	/// <summary>PID: 102 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Latestlistingname_102 { get { if (base.Columns.ContainsKey(1)) { return base.Columns[1]; } else { return null; } } set { if (base.Columns.ContainsKey(1)) { base.Columns[1] = value; } else { base.Columns.Add(1, value); } } }
+	public System.Object Latestlistingtablename_102 { get { if (base.Columns.ContainsKey(1)) { return base.Columns[1]; } else { return null; } } set { if (base.Columns.ContainsKey(1)) { base.Columns[1] = value; } else { base.Columns.Add(1, value); } } }
 	/// <summary>PID: 102 | Type: read</summary>
-	public System.Object Latestlistingname { get { if (base.Columns.ContainsKey(1)) { return base.Columns[1]; } else { return null; } } set { if (base.Columns.ContainsKey(1)) { base.Columns[1] = value; } else { base.Columns.Add(1, value); } } }
+	public System.Object Latestlistingtablename { get { if (base.Columns.ContainsKey(1)) { return base.Columns[1]; } else { return null; } } set { if (base.Columns.ContainsKey(1)) { base.Columns[1] = value; } else { base.Columns.Add(1, value); } } }
 	/// <summary>PID: 103 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Latestlistingsprice_103 { get { if (base.Columns.ContainsKey(2)) { return base.Columns[2]; } else { return null; } } set { if (base.Columns.ContainsKey(2)) { base.Columns[2] = value; } else { base.Columns.Add(2, value); } } }

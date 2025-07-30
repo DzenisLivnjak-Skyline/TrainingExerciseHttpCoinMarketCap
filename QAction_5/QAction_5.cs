@@ -21,7 +21,7 @@ public static class QAction
                 return;
             }
 
-            latestlistings listings = JsonConvert.DeserializeObject<latestlistings>(response);
+            LatestListings listings = JsonConvert.DeserializeObject<LatestListings>(response);
             if (listings?.Data == null || listings.Data.Count == 0)
             {
                 protocol.Log("QA5|No data in response", LogType.Error, LogLevel.NoLogging);

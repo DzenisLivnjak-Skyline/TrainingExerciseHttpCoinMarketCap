@@ -60,7 +60,7 @@ public class LatestListingDatum
     public LatestListingQuote Quote { get; set; }
 }
 
-public class latestlistings
+public class LatestListings
 {
     [JsonProperty("status")]
     public ListingStatus Status { get; set; }

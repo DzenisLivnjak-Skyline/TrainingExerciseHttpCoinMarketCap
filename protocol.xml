@@ -55,7 +55,7 @@ Any inquiries can be addressed to:
 	<DeviceOID>0</DeviceOID>
 	<ElementType>HTTP-excercise</ElementType>
 	<Type relativeTimers="true">http</Type>
-	<Display defaultPage="General" pageOrder="Authentication;Latest Listings;General;Latest Quotes"/>
+	<Display defaultPage="General" pageOrder="Authentication;Latest Listings;General;Latest Quotes" wideColumnPages=""/>
 	<SNMP includepages="true">auto</SNMP>
 
 	<Compliancies>
@@ -69,7 +69,7 @@ Any inquiries can be addressed to:
 			<Description>After Startup</Description>
 			<Type>dummy</Type>
 		</Param>
-		<Param id="3"> 
+		<Param id="3">
 			<Name>latestListingContentDisplayParam</Name>
 			<Description>Param Used for Getting the API Response</Description>
 			<Type>read</Type>
@@ -101,7 +101,6 @@ Any inquiries can be addressed to:
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
 		<Param id="5" trending="false" save="true">
 			<Name>bearerToken</Name>
 			<Description>Bearer Token</Description>
@@ -154,22 +153,21 @@ Any inquiries can be addressed to:
 				<Type options="Password">string</Type>
 			</Measurement>
 		</Param>
-
 		<Param id="100">
 			<Name>latestListingTable</Name>
-			<Description>Cryptocurrency Latest Listings</Description>
+			<Description>Table With Latest Listings of Cryptocurrency.</Description>
 			<Type>array</Type>
 			<Information>
 				<Subtext>Table with latest listings of cryptocurrency.</Subtext>
 			</Information>
 			<ArrayOptions index="0" options=";naming=/102">
-				<ColumnOption idx="0" pid="101" type="retrieved"/>
-				<ColumnOption idx="1" pid="102" type="retrieved"/>
-				<ColumnOption idx="2" pid="103" type="retrieved"/>
-				<ColumnOption idx="3" pid="104" type="retrieved"/>
-				<ColumnOption idx="4" pid="105" type="retrieved"/>
-				<ColumnOption idx="5" pid="106" type="retrieved"/>
-				<ColumnOption idx="6" pid="107" type="retrieved"/>
+				<ColumnOption idx="0" pid="101" type="retrieved" options=""/>
+				<ColumnOption idx="1" pid="102" type="retrieved" options=""/>
+				<ColumnOption idx="2" pid="103" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap"/>
+				<ColumnOption idx="3" pid="104" type="retrieved" options=""/>
+				<ColumnOption idx="4" pid="105" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap"/>
+				<ColumnOption idx="5" pid="106" type="retrieved" options=""/>
+				<ColumnOption idx="6" pid="107" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap"/>
 			</ArrayOptions>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -182,15 +180,12 @@ Any inquiries can be addressed to:
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:101|0-102|1-103|2-104|3-105|4-106|5-107|6,
-						width:100-150-100-100-120-120-100,
-						sort:105|DESC|0-101|ASC|1-INT-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:101|0-102|1-103|2-104|3-105|4-106|5-107|6,width:122-100-100-100-156-100-101,sort:STRING-STRING-INT-DATETIME|DESC|3-INT-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
-
 		<Param id="101" trending="false">
-			<Name>latestListingInstance</Name>
-			<Description>Cryptocurrency ID</Description>
+			<Name>latestListingTableInstance</Name>
+			<Description>Cryptocurrency ID (Cryptocurrency Latest Listing)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>Table with latest listings of cryptocurrency.</Subtext>
@@ -207,10 +202,9 @@ Any inquiries can be addressed to:
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
 		<Param id="102" trending="false">
-			<Name>latestListingName</Name>
-			<Description>Name</Description>
+			<Name>latestListingTableName</Name>
+			<Description>Name (Cryptocurrency Latest Listing)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>Table with latest listings of cryptocurrency.</Subtext>
@@ -227,10 +221,9 @@ Any inquiries can be addressed to:
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
 		<Param id="103" trending="true">
 			<Name>latestListingsPrice</Name>
-			<Description>Price</Description>
+			<Description>Price (Cryptocurrency Latest Listing)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>Table with latest listings of cryptocurrency.</Subtext>
@@ -264,10 +257,9 @@ Any inquiries can be addressed to:
 				<Type>number</Type>
 			</Measurement>
 		</Param>
-
 		<Param id="104" trending="false">
 			<Name>latestListingsDateAdded</Name>
-			<Description>Date Added</Description>
+			<Description>Date Added (Cryptocurrency Latest Listing)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>Table with latest listings of cryptocurrency.</Subtext>
@@ -292,10 +284,9 @@ Any inquiries can be addressed to:
 				<Type options="date">number</Type>
 			</Measurement>
 		</Param>
-
-		<Param id="105" trending="false">
+		<Param id="105" trending="true">
 			<Name>latestListingsLastUpdate</Name>
-			<Description>Last Update</Description>
+			<Description>Last Update (Cryptocurrency Latest Listing)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>Table with latest listings of cryptocurrency.</Subtext>
@@ -312,6 +303,9 @@ Any inquiries can be addressed to:
 					</Exception>
 				</Exceptions>
 			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Decimals>8</Decimals>
@@ -320,10 +314,9 @@ Any inquiries can be addressed to:
 				<Type options="datetime">number</Type>
 			</Measurement>
 		</Param>
-
 		<Param id="106" trending="false">
 			<Name>latestListingsSymbol</Name>
-			<Description>Symbol</Description>
+			<Description>Symbol (Cryptocurrency Latest Listing)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>Table with latest listings of cryptocurrency.</Subtext>
@@ -346,10 +339,9 @@ Any inquiries can be addressed to:
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
 		<Param id="107" trending="true">
 			<Name>latestListingsPercentChange24h</Name>
-			<Description>24 h % Change</Description>
+			<Description>Price Change in 24h (Cryptocurrency Latest Listing)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>Table with latest listings of cryptocurrency.</Subtext>
@@ -386,7 +378,6 @@ Any inquiries can be addressed to:
 				<Type>number</Type>
 			</Measurement>
 		</Param>
-
 		<Param id="200">
 			<Name>categoriesTable</Name>
 			<Description>Categories Table</Description>
@@ -397,11 +388,11 @@ Any inquiries can be addressed to:
 			<ArrayOptions index="0" options=";naming=/202">
 				<ColumnOption idx="0" pid="201" type="retrieved" options=""/>
 				<ColumnOption idx="1" pid="202" type="retrieved" options=""/>
-				<ColumnOption idx="2" pid="203" type="retrieved" options=""/>
-				<ColumnOption idx="3" pid="204" type="retrieved" options=""/>
-				<ColumnOption idx="4" pid="205" type="retrieved" options=""/>
-				<ColumnOption idx="5" pid="206" type="retrieved" options=""/>
-				<ColumnOption idx="6" pid="207" type="retrieved" options=""/>
+				<ColumnOption idx="2" pid="203" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap"/>
+				<ColumnOption idx="3" pid="204" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap"/>
+				<ColumnOption idx="4" pid="205" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap"/>
+				<ColumnOption idx="5" pid="206" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap"/>
+				<ColumnOption idx="6" pid="207" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap"/>
 				<ColumnOption idx="7" pid="208" type="retrieved" options=""/>
 			</ArrayOptions>
 			<Display>
@@ -415,12 +406,12 @@ Any inquiries can be addressed to:
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:201|0-202|1-203|2-204|3-205|4-206|5-207|6-208|7,width:101-107-122-100-100-119-156-100,sort:STRING-STRING-INT-INT-INT-INT-INT|DESC|6-STRING,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:201|0-202|1-203|2-204|3-205|4-206|5-207|6-208|7,width:101-107-122-100-119-119-156-100,sort:STRING-STRING-INT-INT-INT-INT-INT|DESC|0-STRING,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="201">
 			<Name>categoriesTableInstance</Name>
-			<Description>Category ID</Description>
+			<Description>Category ID (Categories Table)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>Represents the ID of the Category</Subtext>
@@ -439,7 +430,7 @@ Any inquiries can be addressed to:
 		</Param>
 		<Param id="202">
 			<Name>categoriesName</Name>
-			<Description>Category Name</Description>
+			<Description>Category Name (Categories Table)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>Represents the name of the Category</Subtext>
@@ -458,7 +449,7 @@ Any inquiries can be addressed to:
 		</Param>
 		<Param id="203">
 			<Name>categoriesNumberOfTokens</Name>
-			<Description>Number of Tokens</Description>
+			<Description>Number of Tokens (Categories Table)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>Represents the number of tokens in the Category</Subtext>
@@ -492,7 +483,7 @@ Any inquiries can be addressed to:
 		</Param>
 		<Param id="204">
 			<Name>categoriesAvgPricechange</Name>
-			<Description>Price Change</Description>
+			<Description>Price Change (Categories Table)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>Represents the price change of the Category</Subtext>
@@ -527,7 +518,7 @@ Any inquiries can be addressed to:
 		</Param>
 		<Param id="205">
 			<Name>categoriesMarketCap</Name>
-			<Description>Market Cap</Description>
+			<Description>Market Cap (Categories Table)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>Represents the Market Cap of the Category in dollars</Subtext>
@@ -563,7 +554,7 @@ Any inquiries can be addressed to:
 		</Param>
 		<Param id="206">
 			<Name>categoriesVolume</Name>
-			<Description>Volume</Description>
+			<Description>Volume (Categories Table)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>Represents the Volume of the Category</Subtext>
@@ -599,7 +590,7 @@ Any inquiries can be addressed to:
 		</Param>
 		<Param id="207">
 			<Name>categoriesLastUpdated</Name>
-			<Description>Data Poll Time</Description>
+			<Description>Data Poll Time (Categories Table)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>Last poll time for this category</Subtext>
@@ -610,6 +601,9 @@ Any inquiries can be addressed to:
 				<LengthType>next param</LengthType>
 				<Decimals>8</Decimals>
 			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Decimals>8</Decimals>
@@ -620,7 +614,7 @@ Any inquiries can be addressed to:
 		</Param>
 		<Param id="208">
 			<Name>categoriesUserAction</Name>
-			<Description>User Action</Description>
+			<Description>User Action (Categories Table)</Description>
 			<Type>write</Type>
 			<Information>
 				<Subtext>Refresh category from the list</Subtext>
@@ -655,6 +649,9 @@ Any inquiries can be addressed to:
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
 			<Display>
 				<Units>Units</Units>
 				<RTDisplay>true</RTDisplay>
@@ -674,7 +671,7 @@ Any inquiries can be addressed to:
 				<Type>number</Type>
 			</Measurement>
 		</Param>
-		<Param id="210" trending="false">
+		<Param id="210" trending="true">
 			<Name>totalCryptocurrencies</Name>
 			<Description>Total Cryptocurrencies</Description>
 			<Type>read</Type>
@@ -686,6 +683,9 @@ Any inquiries can be addressed to:
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
 			<Display>
 				<Units>Units</Units>
 				<RTDisplay>true</RTDisplay>
@@ -717,6 +717,9 @@ Any inquiries can be addressed to:
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
 			<Display>
 				<Units>Units</Units>
 				<RTDisplay>true</RTDisplay>
@@ -736,7 +739,7 @@ Any inquiries can be addressed to:
 				<Type>number</Type>
 			</Measurement>
 		</Param>
-		<Param id="212" trending="false">
+		<Param id="212" trending="true">
 			<Name>totalExchanges</Name>
 			<Description>Total Exchanges</Description>
 			<Type>read</Type>
@@ -748,6 +751,9 @@ Any inquiries can be addressed to:
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
 			<Display>
 				<Units>Units</Units>
 				<RTDisplay>true</RTDisplay>
@@ -780,6 +786,9 @@ Any inquiries can be addressed to:
 				<LengthType>next param</LengthType>
 				<Decimals>3</Decimals>
 			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
 			<Display>
 				<Units>%</Units>
 				<RTDisplay>true</RTDisplay>
@@ -813,6 +822,9 @@ Any inquiries can be addressed to:
 				<LengthType>next param</LengthType>
 				<Decimals>3</Decimals>
 			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
 			<Display>
 				<Units>%</Units>
 				<RTDisplay>true</RTDisplay>
@@ -833,7 +845,7 @@ Any inquiries can be addressed to:
 				<Type>number</Type>
 			</Measurement>
 		</Param>
-		<Param id="215" trending="false">
+		<Param id="215" trending="true">
 			<Name>latestQuoteLastUpdate</Name>
 			<Description>Last Updated At</Description>
 			<Type>read</Type>
@@ -846,6 +858,9 @@ Any inquiries can be addressed to:
 				<Decimals>8</Decimals>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Decimals>8</Decimals>
@@ -882,7 +897,6 @@ Any inquiries can be addressed to:
 			<Description>description</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext></Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -925,8 +939,6 @@ Any inquiries can be addressed to:
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
-
 	</Params>
 
 	<QActions>
@@ -936,10 +948,45 @@ Any inquiries can be addressed to:
 		<QAction id="4" name="Parse Latest Quotes" encoding="csharp" triggers="216" />
 		<QAction id="5" name="Parse Latest Listings" encoding="csharp" triggers="3"/>
 		<!--<QAction id="6" name="Refresh" encoding="csharp" triggers="208"</QAction>>-->
-
-		
 	</QActions>
-
+	<HTTP>
+		<Session id="1" name="getLatestListings">
+			<Connection id="1" name="Get Latest Listings">
+				<Request verb="GET" url="/api/custom/coinmarketcap?content=latestlistings">
+					<Headers>
+						<Header key="Authorization" pid="5"/>
+					</Headers>
+				</Request>
+				<Response statusCode="4">
+					<Content pid="3"></Content>
+				</Response>
+			</Connection>
+		</Session>
+		<Session id="2" name="getCategories">
+			<Connection id="1" name="Get Categories">
+				<Request verb="GET" url="/api/custom/coinmarketcap?content=categories">
+					<Headers>
+						<Header key="Authorization" pid="5" Prefix="Bearer "/>
+					</Headers>
+				</Request>
+				<Response statusCode="301">
+					<Content pid="300"/>
+				</Response>
+			</Connection>
+		</Session>
+		<Session id="3" name="getLatestQuotes">
+			<Connection id="1" name="Get Latest Quotes">
+				<Request verb="GET" url="/api/custom/coinmarketcap?content=latestquotes">
+					<Headers>
+						<Header key="Authorization" pid="5"/>
+					</Headers>
+				</Request>
+				<Response statusCode="217">
+					<Content pid="216"/>
+				</Response>
+			</Connection>
+		</Session>
+	</HTTP>
 	<Groups>
 		<Group id="1">
 			<Name>Get Latest Listings Group</Name>
@@ -994,7 +1041,6 @@ Any inquiries can be addressed to:
 			<Type>action</Type>
 			<Condition><![CDATA[id:5 != emptystring]]></Condition>
 			<Content>
-				<Id>5</Id>
 				<Id>6</Id>
 			</Content>
 		</Trigger>
@@ -1007,7 +1053,6 @@ Any inquiries can be addressed to:
 				<Id>6</Id>
 			</Content>
 		</Trigger>
-
 	</Triggers>
 	
 	<Actions>
@@ -1031,11 +1076,6 @@ Any inquiries can be addressed to:
 			<On id="4">group</On>
 			<Type>execute next</Type>
 		</Action>
-		<Action id="5">
-			<Name>On Bearer Change Get Categories</Name>
-			<On id="4">group</On>
-			<Type>execute next</Type>
-		</Action>
 		<Action id="6">
 			<Name>On Bearer Change Get Latest Quotes</Name>
 			<On id="5">group</On>
@@ -1046,27 +1086,9 @@ Any inquiries can be addressed to:
 			<On id="1">group</On>
 			<Type>execute next</Type>
 		</Action>
-
-
-
-
-
-
-
-
-
 	</Actions>
 
-
-
 	<Timers>
-		<Timer id="1">
-			<Name>Fast Timer (10s)</Name>
-			<Time initial="true">10000</Time>
-			<Interval>75</Interval>
-			<Content>
-			</Content>
-		</Timer>
 		<Timer id="2">
 			<Name>Medium Timer (1m)</Name>
 			<Time initial="true">60000</Time>
@@ -1076,55 +1098,8 @@ Any inquiries can be addressed to:
 				<Group>5</Group>
 			</Content>
 		</Timer>
-		<Timer id="3">
-			<Name>Slow Timer (1h)</Name>
-			<Time initial="true">3600000</Time>
-			<Interval>75</Interval>
-			<Content>
-			</Content>
-		</Timer>
-		
 	</Timers>
 
-	<HTTP>
-		<Session id="1" name="getLatestListings">
-			<Connection id="1" name="Get Latest Listings">
-				<Request verb="GET" url="/api/custom/coinmarketcap?content=latestlistings">
-					<Headers>
-						<Header key="Authorization" pid="5"/>
-					</Headers>
-				</Request>
-				<Response statusCode="4">
-					<Content pid="3"></Content>
-				</Response>
-			</Connection>
-		</Session>
-		<Session id="2" name="getCategories">
-			<Connection id="1" name="Get Categories">
-				<Request verb="GET" url="/api/custom/coinmarketcap?content=categories">
-					<Headers>
-						<Header key="Authorization" pid="5"/>
-					</Headers>
-				</Request>
-				<Response statusCode="301">
-					<Content pid="300"/>
-				</Response>
-			</Connection>
-		</Session>
-
-		<Session id="3" name="getLatestQuotes">
-			<Connection id="1" name="Get Latest Quotes">
-				<Request verb="GET" url="/api/custom/coinmarketcap?content=latestquotes">
-					<Headers>
-						<Header key="Authorization" pid="5"/>
-					</Headers>
-				</Request>
-				<Response statusCode="217">
-					<Content pid="216"/>
-				</Response>
-			</Connection>
-		</Session>
-	</HTTP>
 	<PortSettings name="HTTP Connection">
 		<PortTypeSerial>
 			<Disabled>true</Disabled>
