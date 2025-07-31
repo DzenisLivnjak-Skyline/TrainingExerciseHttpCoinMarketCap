@@ -10,7 +10,7 @@ public static class QAction
     {
         try
         {
-            object[] @params = (object[])protocol.GetParameters(new uint[] { 3, 4 });
+            object[] @params = (object[])protocol.GetParameters(new uint[] { Parameter.latestlistingcontentdisplayparam_3, Parameter.statuscodelatestlisting_4 });
             string response = Convert.ToString(@params[0]);
             string responseCode = Convert.ToString(@params[1]);
 
@@ -44,7 +44,7 @@ public static class QAction
                 });
             }
 
-            protocol.FillArray(100, tableData, NotifyProtocol.SaveOption.Full);
+            protocol.FillArray(Parameter.Latestlistingtable.tablePid, tableData, NotifyProtocol.SaveOption.Full);
         }
         catch (Exception ex)
         {
@@ -57,10 +57,10 @@ public static class QAction
     {
         try
         {
-            uint[] columnIds = new uint[] { 101, 102 };
+            uint[] columnIds = new uint[] { Parameter.Latestlistingtable.Pid.latestlistingtableinstance, Parameter.Latestlistingtable.Pid.latestlistingtablename };
             object[] response = (object[])protocol.NotifyProtocol(
                 (int)SLNetMessages.NotifyType.NT_GET_TABLE_COLUMNS,
-                100,
+                Parameter.Latestlistingtable.tablePid,
                 columnIds);
 
             if (response == null || response.Length < 2)
@@ -81,7 +81,6 @@ public static class QAction
             double exceptionValue = -101;
             int rowCount = keys.Length;
 
-            // Prepare columns
             object[] colKeys = keys;
             object[] colNames = names;
             object[] colPrice = new object[rowCount];
@@ -99,8 +98,8 @@ public static class QAction
                 colPercentChange24h[i] = exceptionValue;
             }
 
-            protocol.FillArray(100, new object[] {
-                colKeys, colNames, colPrice, colDateAdded, colLastUpdated, colSymbol, colPercentChange24h
+            _ = protocol.FillArray(Parameter.Latestlistingtable.tablePid, new object[] {
+                colKeys, colNames, colPrice, colDateAdded, colLastUpdated, colSymbol, colPercentChange24h,
             });
         }
         catch (Exception ex)

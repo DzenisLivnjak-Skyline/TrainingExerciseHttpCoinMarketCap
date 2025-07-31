@@ -78,6 +78,11 @@ public static class Parameter
 	public const int categoriesstatuscode_301 = 301;
 	/// <summary>PID: 301 | Type: read</summary>
 	public const int categoriesstatuscode = 301;
+	/// <summary>PID: 302 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int updaterowid_302 = 302;
+	/// <summary>PID: 302 | Type: read</summary>
+	public const int updaterowid = 302;
 	public class Write
 	{
 		/// <summary>PID: 55 | Type: write</summary>
@@ -286,7 +291,6 @@ public interface SLProtocolExt : SLProtocol
 	LatestlistingtableQActionTable latestlistingtable { get; set; }
 	/// <summary>PID: 200</summary>
 	CategoriestableQActionTable categoriestable { get; set; }
-	object Afterstartup_dummy { get; set; }
 	object Latestlistingcontentdisplayparam_3 { get; set; }
 	object Latestlistingcontentdisplayparam { get; set; }
 	object Statuscodelatestlisting_4 { get; set; }
@@ -346,6 +350,8 @@ public interface SLProtocolExt : SLProtocol
 	object Categoriescontent { get; set; }
 	object Categoriesstatuscode_301 { get; set; }
 	object Categoriesstatuscode { get; set; }
+	object Updaterowid_302 { get; set; }
+	object Updaterowid { get; set; }
 	WriteParameters Write { get; set; }
 }
 public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
@@ -354,8 +360,6 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public LatestlistingtableQActionTable latestlistingtable { get; set; }
 	/// <summary>PID: 200</summary>
 	public CategoriestableQActionTable categoriestable { get; set; }
-	/// <summary>PID: 2  | Type: dummy</summary>
-	public System.Object Afterstartup_dummy {get { return GetParameter(2); }set { SetParameter(2, value); }}
 	/// <summary>PID: 3  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Latestlistingcontentdisplayparam_3 {get { return GetParameter(3); }set { SetParameter(3, value); }}
@@ -503,6 +507,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Categoriesstatuscode_301 {get { return GetParameter(301); }set { SetParameter(301, value); }}
 	/// <summary>PID: 301  | Type: read</summary>
 	public System.Object Categoriesstatuscode {get { return GetParameter(301); }set { SetParameter(301, value); }}
+	/// <summary>PID: 302  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Updaterowid_302 {get { return GetParameter(302); }set { SetParameter(302, value); }}
+	/// <summary>PID: 302  | Type: read</summary>
+	public System.Object Updaterowid {get { return GetParameter(302); }set { SetParameter(302, value); }}
 	public WriteParameters Write { get; set; }
 	public ConcreteSLProtocolExt()
 	{

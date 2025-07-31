@@ -11,7 +11,7 @@ public static class QAction
     {
         try
         {
-            object[] @params = (object[])protocol.GetParameters(new uint[] { 300, 301 });
+            object[] @params = (object[])protocol.GetParameters(new uint[] { Parameter.categoriescontent_300, Parameter.categoriesstatuscode_301 });
             string response = Convert.ToString(@params[0]);
             string responseCode = Convert.ToString(@params[1]);
 
@@ -46,7 +46,7 @@ public static class QAction
                 });
             }
 
-            protocol.FillArray(200, tableData, NotifyProtocol.SaveOption.Full);
+            protocol.FillArray(Parameter.Categoriestable.tablePid, tableData, NotifyProtocol.SaveOption.Full);
         }
         catch (Exception ex)
         {
@@ -59,10 +59,10 @@ public static class QAction
     {
         try
         {
-            uint[] columnIds = new uint[] { 201, 202 };
+            uint[] columnIds = new uint[] { Parameter.Categoriestable.Pid.categoriestableinstance, Parameter.Categoriestable.Pid.categoriesname};
             object[] response = (object[])protocol.NotifyProtocol(
                 (int)SLNetMessages.NotifyType.NT_GET_TABLE_COLUMNS,
-                200,
+                Parameter.Categoriestable.tablePid,
                 columnIds);
 
             if (response == null || response.Length < 2)
@@ -98,7 +98,7 @@ public static class QAction
                 });
             }
 
-            protocol.FillArray(200, fallbackData, NotifyProtocol.SaveOption.Full);
+            protocol.FillArray(Parameter.Categoriestable.tablePid, fallbackData, NotifyProtocol.SaveOption.Full);
         }
         catch (Exception ex)
         {

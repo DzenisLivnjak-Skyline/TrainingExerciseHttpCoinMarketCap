@@ -1,23 +1,12 @@
 ﻿using System;
-using Skyline.DataMiner.Scripting;
 using Newtonsoft.Json;
-public static class Parameter
-{
-    public const int ActiveCryptocurrencies = 209;
-    public const int TotalCryptocurrencies = 210;
-    public const int ActiveExchanges = 211;
-    public const int TotalExchanges = 212;
-    public const int EthDominance = 213;
-    public const int BtcDominance = 214;
-    public const int LatestQuoteLastUpdate = 215;
-    public const int LatestQuotesContent = 216;
-}
+using Skyline.DataMiner.Scripting;
+
 public static class QAction
 {
     public static void Run(SLProtocol protocol)
-
     {
-        var @params = (object[])protocol.GetParameters(new uint[] { 216, 217 });
+        var @params = (object[])protocol.GetParameters(new uint[] { Parameter.latestquotescontent, Parameter.lateststatusquotes });
         var rawJson = Convert.ToString(@params[0]);
         var statusCode = Convert.ToString(@params[1]);
 
@@ -30,9 +19,29 @@ public static class QAction
         try
         {
             var latestquotes = JsonConvert.DeserializeObject<LatestQuotes>(rawJson);
-            protocol.SetParameters(
-                new[] { Parameter.ActiveCryptocurrencies, Parameter.TotalCryptocurrencies, Parameter.ActiveExchanges, Parameter.TotalExchanges, Parameter.EthDominance, Parameter.BtcDominance, Parameter.LatestQuoteLastUpdate },
-                new object[] {latestquotes.Data.ActiveCryptocurrencies, latestquotes.Data.TotalCryptocurrencies, latestquotes.Data.ActiveExchanges, latestquotes.Data.TotalExchanges, latestquotes.Data.EthDominance, latestquotes.Data.BtcDominance, latestquotes.Data.LastUpdated });
+#pragma warning disable SA1118 
+            _ = protocol.SetParameters(
+                new[]
+                {
+                    Parameter.activecryptocurrencies,
+                    Parameter.totalcryptocurrencies,
+                    Parameter.activeexchanges,
+                    Parameter.totalexchanges,
+                    Parameter.ethdominance,
+                    Parameter.btcdominance,
+                    Parameter.latestquotelastupdate,
+                },
+                new object[]
+                {
+                    latestquotes.Data.ActiveCryptocurrencies,
+                    latestquotes.Data.TotalCryptocurrencies,
+                    latestquotes.Data.ActiveExchanges,
+                    latestquotes.Data.TotalExchanges,
+                    latestquotes.Data.EthDominance,
+                    latestquotes.Data.BtcDominance,
+                    latestquotes.Data.LastUpdated,
+                });
+#pragma warning restore SA1118 // Parameter should not span multiple lines
         }
         catch (Exception ex)
         {

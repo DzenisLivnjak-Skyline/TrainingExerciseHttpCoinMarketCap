@@ -64,11 +64,6 @@ Any inquiries can be addressed to:
 	</Compliancies>
 
 	<Params>
-		<Param id="2">
-			<Name>AfterStartup</Name>
-			<Description>After Startup</Description>
-			<Type>dummy</Type>
-		</Param>
 		<Param id="3">
 			<Name>latestListingContentDisplayParam</Name>
 			<Description>Param Used for Getting the API Response</Description>
@@ -180,7 +175,7 @@ Any inquiries can be addressed to:
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:101|0-102|1-103|2-104|3-105|4-106|5-107|6,width:122-100-100-100-156-100-101,sort:STRING-STRING-INT-DATETIME|DESC|3-INT-STRING-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:101|0-102|1-103|2-104|3-105|4-106|5-107|6,width:122-100-100-100-156-100-130,sort:STRING-STRING-INT-INT|DESC|0-INT-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="101" trending="false">
@@ -305,6 +300,7 @@ Any inquiries can be addressed to:
 			</Interprete>
 			<Alarm>
 				<Monitored>true</Monitored>
+				<Normal>0</Normal>
 			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -588,7 +584,7 @@ Any inquiries can be addressed to:
 				<Type>number</Type>
 			</Measurement>
 		</Param>
-		<Param id="207">
+		<Param id="207" trending="true">
 			<Name>categoriesLastUpdated</Name>
 			<Description>Data Poll Time (Categories Table)</Description>
 			<Type>read</Type>
@@ -603,6 +599,7 @@ Any inquiries can be addressed to:
 			</Interprete>
 			<Alarm>
 				<Monitored>true</Monitored>
+				<Normal>0</Normal>
 			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -651,6 +648,7 @@ Any inquiries can be addressed to:
 			</Interprete>
 			<Alarm>
 				<Monitored>true</Monitored>
+				<Normal>0</Normal>
 			</Alarm>
 			<Display>
 				<Units>Units</Units>
@@ -685,6 +683,7 @@ Any inquiries can be addressed to:
 			</Interprete>
 			<Alarm>
 				<Monitored>true</Monitored>
+				<Normal>0</Normal>
 			</Alarm>
 			<Display>
 				<Units>Units</Units>
@@ -719,6 +718,7 @@ Any inquiries can be addressed to:
 			</Interprete>
 			<Alarm>
 				<Monitored>true</Monitored>
+				<Normal>0</Normal>
 			</Alarm>
 			<Display>
 				<Units>Units</Units>
@@ -753,6 +753,7 @@ Any inquiries can be addressed to:
 			</Interprete>
 			<Alarm>
 				<Monitored>true</Monitored>
+				<Normal>0</Normal>
 			</Alarm>
 			<Display>
 				<Units>Units</Units>
@@ -788,6 +789,7 @@ Any inquiries can be addressed to:
 			</Interprete>
 			<Alarm>
 				<Monitored>true</Monitored>
+				<Normal>0</Normal>
 			</Alarm>
 			<Display>
 				<Units>%</Units>
@@ -824,6 +826,7 @@ Any inquiries can be addressed to:
 			</Interprete>
 			<Alarm>
 				<Monitored>true</Monitored>
+				<Normal>0</Normal>
 			</Alarm>
 			<Display>
 				<Units>%</Units>
@@ -860,6 +863,7 @@ Any inquiries can be addressed to:
 			</Interprete>
 			<Alarm>
 				<Monitored>true</Monitored>
+				<Normal>0</Normal>
 			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -939,16 +943,35 @@ Any inquiries can be addressed to:
 				<Type>string</Type>
 			</Measurement>
 		</Param>
+		<Param id="302" trending="false">
+			<Name>UpdateRowId</Name>
+			<Description>Update Row Id</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Update Row Id</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>false</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
 	</Params>
+
 
 	<QActions>
 		<QAction id="1" name="Precompiled Code" encoding="csharp" options="precompile" />
-		<QAction id="2" name="After Startup" encoding="csharp" triggers="2" />
 		<QAction id="3" name="Get Categories" encoding="csharp" triggers="300" />
 		<QAction id="4" name="Parse Latest Quotes" encoding="csharp" triggers="216" />
 		<QAction id="5" name="Parse Latest Listings" encoding="csharp" triggers="3"/>
-		<!--<QAction id="6" name="Refresh" encoding="csharp" triggers="208"</QAction>>-->
-		<!--<QAction id="7" name="AddBearerToAccessToken" encoding="csharp" triggers="55" />-->
+		<QAction id="6" name="Refresh" encoding="csharp" triggers="208"/>
+		<QAction id="7" name="AddBearerToAccessToken" encoding="csharp" triggers="55" />
 	</QActions>
 	<HTTP>
 		<Session id="1" name="getLatestListings">
@@ -987,6 +1010,26 @@ Any inquiries can be addressed to:
 				</Response>
 			</Connection>
 		</Session>
+		<Session id="4" name="Get Category By Id">
+			<Connection id="1" name="Get Category By Id">
+				<Request verb="GET" url="/api/custom/coinmarketcap">
+					<Parameters>
+						<Parameter key="content">category</Parameter>
+						<Parameter key="id" pid="302"/>
+						<!-- UpdateRowId -->
+					</Parameters>
+					<Headers>
+						<Header key="Authorization" pid="5"/>
+					</Headers>
+				</Request>
+				<Response statusCode="301">
+					<!-- reuse or define distinct if needed -->
+					<Content pid="300"/>
+					<!-- categoriesContent -->
+				</Response>
+			</Connection>
+		</Session>
+
 	</HTTP>
 	<Groups>
 		<Group id="1">
@@ -995,14 +1038,6 @@ Any inquiries can be addressed to:
 			<Condition><![CDATA[id:5 != emptystring]]></Condition>
 			<Content>
 				<Session>1</Session>
-			</Content>
-		</Group>
-		<Group id="2">
-			<Name>After Startup</Name>
-			<Description>After Startup</Description>
-			<Type>poll action</Type>
-			<Content>
-				<Action>2</Action>
 			</Content>
 		</Group>
 		<Group id="4">
@@ -1021,20 +1056,16 @@ Any inquiries can be addressed to:
 				<Session>3</Session>
 			</Content>
 		</Group>
-	
+		<Group id="6">
+			<Name>Refresh Single Category</Name>
+			<Type>poll</Type>
+			<Condition><![CDATA[id:302 != emptystring]]></Condition>
+			<Content>
+				<Session>4</Session>
+			</Content>
+		</Group>
 	</Groups>
 	<Triggers>
-		<Trigger id="1">
-			<Name>After Startup (Merged)</Name>
-			<On>protocol</On>
-			<Time>after startup</Time>
-			<Type>action</Type>
-			<Content>
-				<Id>1</Id>
-				<Id>4</Id>
-				<Id>7</Id>
-			</Content>
-		</Trigger>
 		<Trigger id="2">
 			<Name>On Bearer Token Change</Name>
 			<On id="5">parameter</On>
@@ -1046,36 +1077,20 @@ Any inquiries can be addressed to:
 			</Content>
 		</Trigger>
 		<Trigger id="3">
-			<Name>Refresh Category Table</Name>
-			<On id="208">parameter</On>
-			<Time>change</Time>
-			<Type>action</Type>
-			<Content>
-				<Id>6</Id>
-			</Content>
-		</Trigger>
-		<!--<Trigger id="4">
-			<Name>On Bearer Token Input Change</Name>
-			<On id="55">parameter</On>
+			<Name>On UpdateRowId Change</Name>
+			<On id="302">parameter</On>
 			<Time>change</Time>
 			<Type>action</Type>
 			<Content>
 				<Id>8</Id>
 			</Content>
-		</Trigger>-->
+		</Trigger>
+
+
+
 	</Triggers>
 	
 	<Actions>
-		<Action id="1">
-			<Name>After Startup Group</Name>
-			<On id="2">group</On>
-			<Type>execute next</Type>
-		</Action>
-		<Action id="2">
-			<Name>After Startup QAction</Name>
-			<On id="2">parameter</On>
-			<Type>run actions</Type>
-		</Action>
 		<Action id="3">
 			<Name>Run Get Categories QAction</Name>
 			<On id="3">parameter</On>
@@ -1096,11 +1111,13 @@ Any inquiries can be addressed to:
 			<On id="1">group</On>
 			<Type>execute next</Type>
 		</Action>
-		<!--<Action id="8">
-			<Name>Run Add Bearer Prefix QAction</Name>
-			<On id="7">qaction</On>
-			<Type>run actions</Type>
-		</Action>-->
+		<Action id="8">
+			<Name>Refresh Single Category Group</Name>
+			<On id="302">parameter</On>
+			<Type>execute next</Type>
+		</Action>
+
+
 	</Actions>
 
 	<Timers>
