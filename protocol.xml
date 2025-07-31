@@ -948,6 +948,7 @@ Any inquiries can be addressed to:
 		<QAction id="4" name="Parse Latest Quotes" encoding="csharp" triggers="216" />
 		<QAction id="5" name="Parse Latest Listings" encoding="csharp" triggers="3"/>
 		<!--<QAction id="6" name="Refresh" encoding="csharp" triggers="208"</QAction>>-->
+		<!--<QAction id="7" name="AddBearerToAccessToken" encoding="csharp" triggers="55" />-->
 	</QActions>
 	<HTTP>
 		<Session id="1" name="getLatestListings">
@@ -966,7 +967,7 @@ Any inquiries can be addressed to:
 			<Connection id="1" name="Get Categories">
 				<Request verb="GET" url="/api/custom/coinmarketcap?content=categories">
 					<Headers>
-						<Header key="Authorization" pid="5" Prefix="Bearer "/>
+						<Header key="Authorization" pid="5" />
 					</Headers>
 				</Request>
 				<Response statusCode="301">
@@ -1053,6 +1054,15 @@ Any inquiries can be addressed to:
 				<Id>6</Id>
 			</Content>
 		</Trigger>
+		<!--<Trigger id="4">
+			<Name>On Bearer Token Input Change</Name>
+			<On id="55">parameter</On>
+			<Time>change</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>8</Id>
+			</Content>
+		</Trigger>-->
 	</Triggers>
 	
 	<Actions>
@@ -1086,6 +1096,11 @@ Any inquiries can be addressed to:
 			<On id="1">group</On>
 			<Type>execute next</Type>
 		</Action>
+		<!--<Action id="8">
+			<Name>Run Add Bearer Prefix QAction</Name>
+			<On id="7">qaction</On>
+			<Type>run actions</Type>
+		</Action>-->
 	</Actions>
 
 	<Timers>

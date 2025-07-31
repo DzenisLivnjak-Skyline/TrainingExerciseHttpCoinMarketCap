@@ -78,24 +78,30 @@ public static class QAction
                 return;
             }
 
-            List<object[]> fallbackData = new List<object[]>();
             double exceptionValue = -101;
+            int rowCount = keys.Length;
 
-            for (int i = 0; i < keys.Length; i++)
+            // Prepare columns
+            object[] colKeys = keys;
+            object[] colNames = names;
+            object[] colPrice = new object[rowCount];
+            object[] colDateAdded = new object[rowCount];
+            object[] colLastUpdated = new object[rowCount];
+            object[] colSymbol = new object[rowCount];
+            object[] colPercentChange24h = new object[rowCount];
+
+            for (int i = 0; i < rowCount; i++)
             {
-                fallbackData.Add(new object[]
-                {
-                    keys[i],
-                    names[i],
-                    exceptionValue,
-                    exceptionValue,
-                    exceptionValue,
-                    "-101",
-                    exceptionValue,
-                });
+                colPrice[i] = exceptionValue;
+                colDateAdded[i] = exceptionValue;
+                colLastUpdated[i] = exceptionValue;
+                colSymbol[i] = "-101";
+                colPercentChange24h[i] = exceptionValue;
             }
 
-            protocol.FillArray(100, fallbackData, NotifyProtocol.SaveOption.Full);
+            protocol.FillArray(100, new object[] {
+                colKeys, colNames, colPrice, colDateAdded, colLastUpdated, colSymbol, colPercentChange24h
+            });
         }
         catch (Exception ex)
         {
