@@ -48,6 +48,14 @@ public class Categories
     public List<Datum> Data { get; set; }
 }
 
+public class SingleCategoryResponse
+{
+    [JsonProperty("status")]
+    public CategoryStatus Status { get; set; }
+
+    [JsonProperty("data")]
+    public Datum Data { get; set; }
+}
 public class CategoryStatus
 {
     [JsonProperty("timestamp")]

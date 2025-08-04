@@ -68,6 +68,16 @@ public static class Parameter
 	public const int lateststatusquotes_217 = 217;
 	/// <summary>PID: 217 | Type: read</summary>
 	public const int lateststatusquotes = 217;
+	/// <summary>PID: 218 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int refreshcategory_218 = 218;
+	/// <summary>PID: 218 | Type: read</summary>
+	public const int refreshcategory = 218;
+	/// <summary>PID: 219 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int categoriesresponsestatussinglerow_219 = 219;
+	/// <summary>PID: 219 | Type: read</summary>
+	public const int categoriesresponsestatussinglerow = 219;
 	/// <summary>PID: 300 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int categoriescontent_300 = 300;
@@ -346,6 +356,10 @@ public interface SLProtocolExt : SLProtocol
 	object Latestquotescontent { get; set; }
 	object Lateststatusquotes_217 { get; set; }
 	object Lateststatusquotes { get; set; }
+	object Refreshcategory_218 { get; set; }
+	object Refreshcategory { get; set; }
+	object Categoriesresponsestatussinglerow_219 { get; set; }
+	object Categoriesresponsestatussinglerow { get; set; }
 	object Categoriescontent_300 { get; set; }
 	object Categoriescontent { get; set; }
 	object Categoriesstatuscode_301 { get; set; }
@@ -497,6 +511,16 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Lateststatusquotes_217 {get { return GetParameter(217); }set { SetParameter(217, value); }}
 	/// <summary>PID: 217  | Type: read</summary>
 	public System.Object Lateststatusquotes {get { return GetParameter(217); }set { SetParameter(217, value); }}
+	/// <summary>PID: 218  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Refreshcategory_218 {get { return GetParameter(218); }set { SetParameter(218, value); }}
+	/// <summary>PID: 218  | Type: read</summary>
+	public System.Object Refreshcategory {get { return GetParameter(218); }set { SetParameter(218, value); }}
+	/// <summary>PID: 219  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Categoriesresponsestatussinglerow_219 {get { return GetParameter(219); }set { SetParameter(219, value); }}
+	/// <summary>PID: 219  | Type: read</summary>
+	public System.Object Categoriesresponsestatussinglerow {get { return GetParameter(219); }set { SetParameter(219, value); }}
 	/// <summary>PID: 300  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Categoriescontent_300 {get { return GetParameter(300); }set { SetParameter(300, value); }}

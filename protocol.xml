@@ -911,6 +911,35 @@ Any inquiries can be addressed to:
 				<Type>string</Type>
 			</Measurement>
 		</Param>
+		<Param id="218">
+			<Name>refreshCategory</Name>
+			<Description>Status Code For Refresh Category</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>text</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="219">
+			<Name>categoriesResponseStatusSingleRow</Name>
+			<Description>Categories Response Status Single Row</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Represents the response status from /api/custom/coinmarketcap/categories/{CategoryId}</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
 		<Param id="300">
 			<Name>categoriesContent</Name>
 			<Description>Raw categories API response</Description>
@@ -962,6 +991,8 @@ Any inquiries can be addressed to:
 				<Type>string</Type>
 			</Measurement>
 		</Param>
+		
+		
 	</Params>
 
 
@@ -970,8 +1001,9 @@ Any inquiries can be addressed to:
 		<QAction id="3" name="Get Categories" encoding="csharp" triggers="300" />
 		<QAction id="4" name="Parse Latest Quotes" encoding="csharp" triggers="216" />
 		<QAction id="5" name="Parse Latest Listings" encoding="csharp" triggers="3"/>
-		<QAction id="6" name="Refresh" encoding="csharp" triggers="208"/>
+		<QAction id="6" name="RefreshCategoryRowQAction" encoding="csharp" row="true" triggers="208" />
 		<QAction id="7" name="AddBearerToAccessToken" encoding="csharp" triggers="55" />
+		<QAction id="8" name="UpdateCategoryRow" encoding="csharp" triggers="219" />
 	</QActions>
 	<HTTP>
 		<Session id="1" name="getLatestListings">
@@ -997,6 +1029,7 @@ Any inquiries can be addressed to:
 					<Content pid="300"/>
 				</Response>
 			</Connection>
+			
 		</Session>
 		<Session id="3" name="getLatestQuotes">
 			<Connection id="1" name="Get Latest Quotes">
@@ -1016,20 +1049,16 @@ Any inquiries can be addressed to:
 					<Parameters>
 						<Parameter key="content">category</Parameter>
 						<Parameter key="id" pid="302"/>
-						<!-- UpdateRowId -->
 					</Parameters>
 					<Headers>
 						<Header key="Authorization" pid="5"/>
 					</Headers>
 				</Request>
-				<Response statusCode="301">
-					<!-- reuse or define distinct if needed -->
-					<Content pid="300"/>
-					<!-- categoriesContent -->
+				<Response statusCode="218">
+					<Content pid="219"/>
 				</Response>
 			</Connection>
 		</Session>
-
 	</HTTP>
 	<Groups>
 		<Group id="1">
@@ -1073,6 +1102,7 @@ Any inquiries can be addressed to:
 			<Type>action</Type>
 			<Condition><![CDATA[id:5 != emptystring]]></Condition>
 			<Content>
+				<Id>7</Id>
 				<Id>6</Id>
 			</Content>
 		</Trigger>
@@ -1085,6 +1115,7 @@ Any inquiries can be addressed to:
 				<Id>8</Id>
 			</Content>
 		</Trigger>
+		
 
 
 
@@ -1113,8 +1144,8 @@ Any inquiries can be addressed to:
 		</Action>
 		<Action id="8">
 			<Name>Refresh Single Category Group</Name>
-			<On id="302">parameter</On>
-			<Type>execute next</Type>
+			<On id="6">group</On>
+			<Type>execute one top</Type>
 		</Action>
 
 
@@ -1126,6 +1157,7 @@ Any inquiries can be addressed to:
 			<Time initial="true">60000</Time>
 			<Interval>75</Interval>
 			<Content>
+				<Group>1</Group>
 				<Group>4</Group>
 				<Group>5</Group>
 			</Content>
